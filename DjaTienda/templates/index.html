@@ -1,0 +1,72 @@
+{% extends "plantmas.html" %}
+{% load staticfiles %}
+{% block titulo %}Flash Store{% endblock %}
+
+{% block contenido %}
+
+<!--bottom-header-->
+	<!--banner-starts-->
+	<div class="bnr" id="home">
+		<div  id="top" class="callbacks_container">
+			<ul class="rslides" id="slider4">
+			    <li>
+					<img src="{% static 'images/bnr-1.jpg' %}" alt=""/>
+				</li>
+
+				<li>
+					<img src="{% static 'images/bnr-3.jpg' %}" alt=""/>
+				</li>
+			</ul>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+	<!--banner-ends-->
+	<!--Slider-Starts-Here-->
+				<script src="{% static 'js/responsiveslides.min.js' %}"></script>
+			 <script>
+			    // You can also use "$(window).load(function() {"
+			    $(function () {
+			      // Slideshow 4
+			      $("#slider4").responsiveSlides({
+			        auto: true,
+			        pager: true,
+			        nav: true,
+			        speed: 500,
+			        namespace: "callbacks",
+			        before: function () {
+			          $('.events').append("<li>before event fired.</li>");
+			        },
+			        after: function () {
+			          $('.events').append("<li>after event fired.</li>");
+			        }
+			      });
+
+			    });
+			  </script>
+			<!--End-slider-script-->
+<div class="product">
+		</li class="container">
+	<div class="product-top">
+				<div class="product-one">
+					{% for lisprod in productos %}
+                    <div class="col-md-3 product-left">
+						<div class="product-main simpleCart_shelfItem">
+							<img src="{{ lisprod.docfile.url }}" width="100" height="100"/>
+							<div class="product-bottom">
+								<h3></h3>
+								<p>{{lisprod.nombre}}</p>
+								<h4><a class="item_add" ><i></i></a> <span class=" item_price">{{lisprod.precio}}</span></h4>
+<a class="btn btn-primary" href="{% url 'detalles' lisprod.id %}">ver detalles</a>
+							</div>
+							<div class="srch">
+								<span>{{lisprod.categorias.nombre}}</span>
+							</div>
+						</div>
+					</div>
+               {% endfor %}
+
+			</div>
+		</div>
+	</div>
+	<!--product-end-->
+{% endblock %}

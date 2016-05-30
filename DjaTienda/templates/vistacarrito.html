@@ -1,0 +1,58 @@
+{% extends 'plantmas.html' %}
+{% block titulo %} Carrito {% endblock %}
+{% block cabecera %}
+<div class="logo">
+		<a href="#"><h1>carrito</h1></a>
+</div>
+
+{% endblock %}
+{% block contenido %}
+<div class="container">{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-info">
+    <li>{{ message }}</li>
+     </div>
+    {% endfor %}
+</ul>
+{% endif %}
+    <div class="row">
+    <table class="table">
+    <thead>
+    <tr>
+        <th>Producto</th>
+        <th>Nombre</th>
+        <th>cantidad</th>
+        <th>Precio</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if ventas|length > 0 %}
+    {% for v in ventas %}
+    <tr>
+        <td><img src="{{ v.productos.docfile.url}}" width="50" height="50"></td>
+        <td>{{v.productos.nombre}}</td>
+        <td>{{v.cantidad}}</td>
+        <td>{{v.productos.precio}}</td>
+        <td><a class="btn btn-danger" href="{% url 'rm' v.productos.id %}">x</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+{% else %}
+    <div class="alert alert-info">
+  <strong></strong> No hay productos agregados en el carrito
+</div>
+    {% endif %}
+</table>
+        </div>
+  <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"><a class="btn btn-primary" href="{% url 'fincompra' %}">comprar</a></div>
+      <div class="col-md-4"></div>
+    </div>
+    </div>
+{% endblock %}
+{% block footer %}
+<a href="{% url 'home' %}" class="btn btn-primary">volver a pagina principal</a>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'plantmas.html'%}
+{% load staticfiles %}
+
+{% block contenido %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-info">
+    <li>{{ message }}</li>
+     </div>
+    {% endfor %}
+</ul>
+{% endif %}
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h1 class="text-center">Nuevo Producto</h1>
+      </div>
+      <div class="modal-body">
+   <form action="/regprod/" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="form-group">
+              <input type="text" name="nombre" class="form-control input-lg" placeholder="Nombre del Producto">
+            </div>
+            <div class="form-group">
+              <input type="number" value="o" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="c1" name="num"/>
+            </div>
+
+            <div class="form-group">
+               <textarea class="form-control"  name="des" rows="5" id="comment"></textarea>
+            </div>
+
+            <div class="form-group">
+            <input id="input-folder-1" type="file"  name="docfile" />
+           </div>
+           <div class="form-group">
+            <select name="sele" class="form-control">
+                {% for cat in categorias %}
+                <option value="{{cat.id}}">{{cat.nombre}}</option>
+                {% endfor %}
+            </select>
+           </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-lg btn-block">Agregar</button>
+
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+  </div>
+  </div>
+
+{% endblock%}
